@@ -29,3 +29,6 @@ subjects:
 EOF
 
 kubectl wait --namespace "$NS" --for=condition=available --timeout=600s deployment argo-workflows-server argo-workflows-workflow-controller
+
+
+argo submit -n "$NS" --serviceaccount=argo-workflow https://raw.githubusercontent.com/argoproj/argo-workflows/master/examples/hello-world.yaml --watch
