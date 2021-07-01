@@ -26,7 +26,7 @@ kubeVersionOverride: ""
 
 # Restrict Argo to only deploy into a single namespace by apply Roles and RoleBindings instead of the Cluster equivalents,
 # and start argo-cli with the --namespaced flag. Use it in clusters with strict access policy.
-singleNamespace: false
+singleNamespace: true
 
 workflow:
   namespace: "" # Specify namespace if workflows run in another namespace than argo. This controls where the service account and RBAC resources will be created.
