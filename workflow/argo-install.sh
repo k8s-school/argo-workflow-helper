@@ -30,11 +30,8 @@ helm install --create-namespace --namespace "$NS" -f "$DIR/values.yaml" argo-wor
 #   namespace: $NS
 # EOF
 
-echo "Add additional RBAC to  argo-workflow service account (manage jobs.batch)"
+echo "Add additional RBAC to argo-workflow service account (manage jobs.batch)"
 kubectl patch roles.rbac.authorization.k8s.io argo-workflows-workflow --type='json' \
     -p='[{"op": "add", "path": "/rules/-", "value": {"apiGroups": ["batch"],"resources": ["jobs"],"verbs": ["create", "get", "watch"]} }]'
 
 kubectl wait --namespace "$NS" --for=condition=available --timeout=600s deployment argo-workflows-server argo-workflows-workflow-controller
-
-
-argo submit -n "$NS" --serviceaccount=argo-workflow https://raw.githubusercontent.com/argoproj/argo-workflows/master/examples/hello-world.yaml --watch
