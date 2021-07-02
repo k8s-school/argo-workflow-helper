@@ -20,6 +20,9 @@ jobs:
       - name: Install argo workflow
         run: |
           ./workflow/install.sh
+      - name: Install argo client
+        run: |
+          ./argo-client-install.sh
       - name: Run test on authorization
         run: |
           ./workflow/test.sh
