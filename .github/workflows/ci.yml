@@ -19,14 +19,7 @@ jobs:
           ./kind-helper/k8s-create.sh -s
       - name: Install argo workflow
         run: |
-          ./1_internals/ci.sh
+          ./workflow/install.sh
       - name: Run test on authorization
         run: |
-          ./2_authorization/ci.sh
-      - name: Run test on policies
-        run: |
-          ./3_policies/ci.sh
-      - name: Run test on computational resources
-        run: |
-          ./4_computational_resources/ci.sh
-          ./B_prometheus/install.sh
+          ./workflow/test.sh
