@@ -6,6 +6,7 @@
 set -euxo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
+. "$DIR/../conf.sh"
 
 usage() {
   cat << EOD
@@ -44,7 +45,7 @@ NS=$(kubectl get sa -o=jsonpath='{.items[0].metadata.namespace}')
 echo "Install Argo Workflow inside current namespace ($NS)"
 helm repo add argo https://argoproj.github.io/argo-helm --force-update
 helm repo update
-helm install --namespace "$NS" -f "$DIR/values.yaml" argo-workflows argo/argo-workflows --version 0.2.6
+helm upgrade --install --namespace "$NS" argo-workflows argo/argo-workflows --version "$HELMCHART_ARGO_WORFLOWS_VERSION"
 
 # -- Example: Grant all RBAC to argo service account
 # cat <<EOF | kubectl apply -f -
