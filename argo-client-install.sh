@@ -23,7 +23,13 @@ if [ -e "$argo_bin" ]; then
     fi
 fi
 
-curl -sLO https://github.com/argoproj/argo-workflows/releases/download/$ARGO_CLIENT_VERSION/argo-linux-amd64.gz
-gunzip argo-linux-amd64.gz
-chmod +x argo-linux-amd64
-sudo mv ./argo-linux-amd64 /usr/local/bin/argo
+curl --create-dirs --output-dir /tmp/ -sLO https://github.com/argoproj/argo-workflows/releases/download/$ARGO_CLIENT_VERSION/argo-linux-amd64.gz
+gunzip /tmp/argo-linux-amd64.gz
+chmod +x /tmp/argo-linux-amd64
+
+if [ "$(id -u)" -ne 0 ]
+then
+  sudo mv /tmp/argo-linux-amd64 /usr/local/bin/argo	
+else
+  mv /tmp/argo-linux-amd64 /usr/local/bin/argo
+fi
