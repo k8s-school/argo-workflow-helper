@@ -10,8 +10,8 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 . "$DIR/conf.sh"
 . "$DIR/include.sh"
 
-
 ARGO_OPERATOR_VERSION="v0.6.0"
+ARGO_OPERATOR_VERSION="ba14854"
 echo "Install ArgoCD Operator $ARGO_OPERATOR_VERSION"
 
 GITHUB_URL="https://raw.githubusercontent.com/argoproj-labs/argocd-operator/$ARGO_OPERATOR_VERSION"
